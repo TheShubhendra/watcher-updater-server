@@ -38,6 +38,14 @@ async def main():
     server.start()
 
 
-loop = asyncio.get_event_loop()
-loop.create_task(main())
-loop.run_forever()
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    task = loop.create_task(main())
+    try:
+        loop.run_forever()
+    except KeyboardInterrupt:
+        asyncio.gather(task)
+        task.cancel()
+        logger.info("Closing loop")
+        pass
+    loop.close()

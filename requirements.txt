@@ -2,3 +2,4 @@ python-decouole
 psycopg2
 sqlachemy
 profile-watcher
+aiohttp[speedups]
