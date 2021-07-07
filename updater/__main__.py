@@ -18,10 +18,11 @@ logger = logging.getLogger(__name__)
 CALLBACK_SERVER = config("CALLBACK_SERVER")
 
 
-def event_handler(event):
+async def event_handler(event):
     logger.info("Sending an event")
     async with aiohttp.ClientSession() as session:
-        await session.post(CALLBACK_SERVER, json=json.dumps(event))
+        await session.post(CALLBACK_SERVER, json=event.json())
+
 
 class Server(Watcher):
     def start(self):
@@ -44,9 +45,9 @@ class Server(Watcher):
 
 server = Server()
 
+
 async def main():
     server.start()
-
 
 
 if __name__ == "__main__":
