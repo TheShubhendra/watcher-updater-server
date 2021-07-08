@@ -1,5 +1,5 @@
-python-decouole
+python-decouple
 psycopg2
-sqlachemy
+sqlalchemy
 profile-watcher
 aiohttp[speedups]
