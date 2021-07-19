@@ -21,7 +21,7 @@ CALLBACK_SERVER = config("CALLBACK_SERVER")
 async def event_handler(event):
     logger.info("Sending an event")
     async with aiohttp.ClientSession() as session:
-        await session.post(CALLBACK_SERVER, json=event.json())
+        await session.post(CALLBACK_SERVER, json=event.json())#00a3fc
 
 
 class Server(Watcher):
@@ -29,7 +29,7 @@ class Server(Watcher):
         logger.info("Starting Server")
         users = api.fetch_usernames(UPDATER_ID)
         for id, usernames in users:
-            self.add_quora(usernames, update_interval=3)
+            self.add_quora(usernames, update_interval=60)
         self.dispatcher.add_handler(QuoraEvent, event_handler)
         loop = asyncio.get_running_loop()
         logger.info("Creating task to run watcher")
